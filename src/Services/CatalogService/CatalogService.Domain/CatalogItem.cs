@@ -2,7 +2,7 @@
 
 namespace CatalogService.Domain
 {
-    public class Catalog:BaseEntity
+    public class CatalogItem:BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }
