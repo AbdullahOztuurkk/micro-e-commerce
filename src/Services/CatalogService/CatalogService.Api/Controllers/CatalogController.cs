@@ -1,13 +1,5 @@
-﻿using CatalogService.Application.Features.Queries.GetCatalogBrandsEvent;
-using CatalogService.Application.Features.Queries.GetCatalogTypesEvent;
-using CatalogService.Application.Features.Queries.GetItemsByBrandEvent;
-using CatalogService.Application.Features.Queries.GetItemsByIdEvent;
-using CatalogService.Application.Features.Queries.GetItemsByNameEvent;
-using CatalogService.Application.Features.Queries.GetItemsByTypeAndBrandEvent;
-using CatalogService.Application.Features.Queries.GetItemsEvent;
-using CatalogService.Application.ViewModels;
+﻿using CatalogService.Application.ViewModels;
 using CatalogService.Domain;
-using CatalogService.Persistence.Context;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -29,7 +21,7 @@ namespace CatalogService.Api.Controllers
         [HttpGet]
         [Route("items")]
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> ItemsAsync([FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0, string ids = null)
+        public async Task<IActionResult> ItemsAsync([FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {
             return Ok(mediator.Send(new GetItemsQueryRequest { PaginateSettings = { PageIndex = pageIndex, PageSize = pageSize } }));
         }
