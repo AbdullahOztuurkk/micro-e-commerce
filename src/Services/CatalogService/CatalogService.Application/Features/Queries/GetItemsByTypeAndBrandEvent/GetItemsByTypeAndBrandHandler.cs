@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CatalogService.Application.Features.Queries.GetItemsByTypeAndBrandEvent
 {
-    public class GetItemsByTypeAndBrandHandler : IRequestHandler<GetItemsByTypeAndBrandRequest, PaginatedItemsViewModel<CatalogItem>>
+    public class GetItemsByTypeAndBrandHandler : IRequestHandler<GetItemsByTypeAndBrandQueryRequest, PaginatedItemsViewModel<CatalogItem>>
     {
         private readonly CatalogContext context;
 
@@ -14,7 +14,7 @@ namespace CatalogService.Application.Features.Queries.GetItemsByTypeAndBrandEven
         {
             this.context = context;
         }
-        public async Task<PaginatedItemsViewModel<CatalogItem>> Handle(GetItemsByTypeAndBrandRequest request, CancellationToken cancellationToken)
+        public async Task<PaginatedItemsViewModel<CatalogItem>> Handle(GetItemsByTypeAndBrandQueryRequest request, CancellationToken cancellationToken)
         {
             var root = (IQueryable<CatalogItem>)context.CatalogItems;
 

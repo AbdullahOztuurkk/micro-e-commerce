@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CatalogService.Application.Features.Queries.GetItemsByTypeAndBrandEvent
 {
-    public class GetItemsByTypeAndBrandRequest : IRequest<PaginatedItemsViewModel<CatalogItem>>
+    public class GetItemsByTypeAndBrandQueryRequest : IRequest<PaginatedItemsViewModel<CatalogItem>>
     {
         public int TypeId { get; set; }
         public int? BrandId { get; set; }
