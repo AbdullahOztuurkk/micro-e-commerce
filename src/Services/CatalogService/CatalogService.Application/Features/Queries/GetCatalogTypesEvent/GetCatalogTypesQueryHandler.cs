@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CatalogService.Application.Features.Queries.GetCatalogTypesEvent
 {
-    public class GetCatalogBrandsQueryRequest : IRequest<List<CatalogType>> { }
-    public class GetCatalogBrandsQueryHandler : IRequestHandler<GetCatalogBrandsQueryRequest, List<CatalogType>>
+    public class GetCatalogTypesQueryRequest : IRequest<List<CatalogType>> { }
+    public class GetCatalogTypesQueryHandler : IRequestHandler<GetCatalogTypesQueryRequest, List<CatalogType>>
     {
         private readonly CatalogContext context;
 
-        public GetCatalogBrandsQueryHandler(CatalogContext context)
+        public GetCatalogTypesQueryHandler(CatalogContext context)
         {
             this.context = context;
         }
-        public async Task<List<CatalogType>> Handle(GetCatalogBrandsQueryRequest request, CancellationToken cancellationToken)
+        public async Task<List<CatalogType>> Handle(GetCatalogTypesQueryRequest request, CancellationToken cancellationToken)
         {
             return await context.CatalogTypes.ToListAsync();
         }
