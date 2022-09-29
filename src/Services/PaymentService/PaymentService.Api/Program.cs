@@ -1,3 +1,7 @@
+using EventBus.MassTransit.RabbitMq.Extensions;
+using MassTransit;
+using PaymentService.Api.IntegrationEvents.Handlers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +10,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.ConfigureMassTransit(builder.Configuration, (context, registrationCfg, factoryCfg) =>
+{
+    registrationCfg.AddConsumer<OrderStartedIntegrationEventHandler>();
+    
+    factoryCfg.ReceiveEndpoint("order_service", (epCfg) =>
+    {
+        epCfg.ConfigureConsumer<OrderStartedIntegrationEventHandler>(context);
+    });
+});
 
 var app = builder.Build();
 
