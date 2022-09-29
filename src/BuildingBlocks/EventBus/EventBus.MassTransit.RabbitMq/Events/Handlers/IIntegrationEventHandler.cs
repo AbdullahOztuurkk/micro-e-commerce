@@ -1,7 +1,9 @@
-﻿namespace EventBus.MassTransit.RabbitMq.Events.Handlers
+﻿using MassTransit;
+
+namespace EventBus.MassTransit.RabbitMq.Events.Handlers
 {
-    public interface IIntegrationEventHandler<TEvent> where TEvent : IntegrationEvent
+    public interface IIntegrationEventHandler<TEvent> : IConsumer<TEvent> where TEvent : IntegrationEvent
     {
-        Task Handle(TEvent @event);
+
     }
 }
