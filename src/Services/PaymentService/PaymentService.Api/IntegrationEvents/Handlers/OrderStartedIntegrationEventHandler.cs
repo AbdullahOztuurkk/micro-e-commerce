@@ -4,7 +4,7 @@ using MassTransit;
 
 namespace PaymentService.Api.IntegrationEvents.Handlers
 {
-    public class OrderStartedIntegrationEventHandler : IIntegrationEventHandler<OrderStartedIntegrationEvent>
+    public class OrderStartedIntegrationEventHandler : IConsumer<OrderStartedIntegrationEvent>
     {
         private readonly IConfiguration configuration;
         private readonly IBus bus;
@@ -21,6 +21,8 @@ namespace PaymentService.Api.IntegrationEvents.Handlers
         {
             string keyword = "PaymentSuccess";
             bool PaymentSuccessFlag = configuration.GetValue<bool>(keyword);
+
+            logger.LogInformation($"Order started event has been triggered with order id: {context.Message.OrderId}");
 
             IntegrationEvent paymentEvent = PaymentSuccessFlag
                 ? new OrderPaymentSuccessIntegrationEvent(context.Message.Id)
