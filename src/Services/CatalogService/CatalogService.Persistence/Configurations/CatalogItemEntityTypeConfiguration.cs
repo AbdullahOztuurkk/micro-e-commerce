@@ -22,11 +22,6 @@ namespace CatalogService.Persistence.Configurations
             builder.Property(x => x.Price)
                 .IsRequired(true);
 
-            builder.Property(x => x.PictureFileName)
-                .IsRequired(false);
-
-            builder.Ignore(x => x.PictureUri);
-
             builder.HasOne(x => x.CatalogBrand)
                 .WithMany()
                 .HasForeignKey(x => x.CatalogBrandId);
