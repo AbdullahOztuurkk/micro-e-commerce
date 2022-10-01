@@ -1,5 +1,6 @@
-using EventBus.MassTransit.RabbitMq.Extensions;
+using EventBus.MassTransit.RabbitMq.Constants;
 using MassTransit;
+using PaymentService.Api.IntegrationEvents;
 using PaymentService.Api.IntegrationEvents.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,17 +12,37 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.ConfigureMassTransit(builder.Configuration, (context, registrationCfg, factoryCfg) =>
+builder.Services.AddMassTransit(x =>
 {
-    registrationCfg.AddConsumer<OrderStartedIntegrationEventHandler>();
+    x.AddConsumer<OrderStartedIntegrationEventHandler>();
+
+    x.SetKebabCaseEndpointNameFormatter();
     
-    factoryCfg.ReceiveEndpoint("order_service", (epCfg) =>
+    x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
     {
-        epCfg.ConfigureConsumer<OrderStartedIntegrationEventHandler>(context);
-    });
+        cfg.ConfigureEndpoints(provider);
+
+        cfg.Host(RabbitMqConstants.Uri, h =>
+        {
+            h.Username(RabbitMqConstants.UserName);
+            h.Password(RabbitMqConstants.Password);
+        });
+        cfg.ReceiveEndpoint(RabbitMqConstants.OrderServiceQueueName, ep =>
+        {
+            ep.PrefetchCount = 16;
+            ep.UseMessageRetry(r => r.Interval(2, 10));
+            ep.UseRateLimit(1000, TimeSpan.FromMinutes(1));
+
+            ep.ConfigureConsumer<OrderStartedIntegrationEventHandler>(provider);
+        });
+    }));
 });
 
 var app = builder.Build();
+
+var bus = app.Services.GetRequiredService<IBus>();
+
+bus.Publish(new OrderStartedIntegrationEvent { OrderId = 29});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
