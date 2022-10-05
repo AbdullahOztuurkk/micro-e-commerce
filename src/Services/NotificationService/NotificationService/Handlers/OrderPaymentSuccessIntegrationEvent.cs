@@ -1,8 +1,9 @@
-﻿using EventBus.MassTransit.RabbitMq.Events.Handlers;
+﻿using EventBus.Contracts.Order;
+using EventBus.MassTransit.RabbitMq.Events.Handlers;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace NotificationService.IntegrationEvents.Handlers
+namespace NotificationService.Handlers
 {
     public class OrderPaymentSuccessIntegrationEventHandler : IIntegrationEventHandler<OrderPaymentSuccessIntegrationEvent>
     {
@@ -16,7 +17,8 @@ namespace NotificationService.IntegrationEvents.Handlers
         public Task Consume(ConsumeContext<OrderPaymentSuccessIntegrationEvent> context)
         {
             //Fake email logic
-            logger.LogInformation("Order payment has been succeeded!");
+            Console.WriteLine("Order payment has been succeeded!");
+            //logger.LogInformation("Order payment has been succeeded!");
             return Task.CompletedTask;
         }
     }

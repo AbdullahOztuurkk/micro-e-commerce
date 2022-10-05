@@ -1,8 +1,9 @@
-﻿using EventBus.MassTransit.RabbitMq.Events.Handlers;
+﻿using EventBus.Contracts.Order;
+using EventBus.MassTransit.RabbitMq.Events.Handlers;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace NotificationService.IntegrationEvents.Handlers
+namespace NotificationService.Handlers
 {
     public class OrderPaymentFailedIntegrationEventHandler : IIntegrationEventHandler<OrderPaymentFailedIntegrationEvent>
     {

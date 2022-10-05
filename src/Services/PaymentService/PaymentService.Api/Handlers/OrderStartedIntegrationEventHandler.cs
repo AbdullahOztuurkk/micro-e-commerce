@@ -1,10 +1,11 @@
-﻿using EventBus.MassTransit.RabbitMq.Events;
+﻿using EventBus.Contracts.Order;
+using EventBus.MassTransit.RabbitMq.Events;
 using EventBus.MassTransit.RabbitMq.Events.Handlers;
 using MassTransit;
 
-namespace PaymentService.Api.IntegrationEvents.Handlers
+namespace PaymentService.Api.Handlers
 {
-    public class OrderStartedIntegrationEventHandler : IConsumer<OrderStartedIntegrationEvent>
+    public class OrderStartedIntegrationEventHandler : IIntegrationEventHandler<OrderStartedIntegrationEvent>
     {
         private readonly IConfiguration configuration;
         private readonly IBus bus;
@@ -28,7 +29,7 @@ namespace PaymentService.Api.IntegrationEvents.Handlers
                 ? new OrderPaymentSuccessIntegrationEvent(context.Message.Id)
                 : new OrderPaymentFailedIntegrationEvent(context.Message.Id, $"Order has been failed due of Order Id: {context.Message.Id}");
 
-            bus.Publish(paymentEvent);
+            context.Publish(paymentEvent);
 
             return Task.CompletedTask;
         }
