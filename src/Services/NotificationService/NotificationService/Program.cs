@@ -1,8 +1,7 @@
 ﻿using EventBus.MassTransit.RabbitMq.Constants;
 using MassTransit;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NotificationService.IntegrationEvents.Handlers;
+using NotificationService.Handlers;
 
 namespace MyNamespace;
 
@@ -41,7 +40,6 @@ public class Program
 
         var bus = serviceProvider.GetRequiredService<IBus>();
 
-       
         Console.WriteLine("Notification Service is running!");
 
         Console.ReadLine();

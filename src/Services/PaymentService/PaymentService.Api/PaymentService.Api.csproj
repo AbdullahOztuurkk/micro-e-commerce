@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\EventBus\EventBus.Contracts\EventBus.Contracts.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\EventBus\EventBus.MassTransit.RabbitMq\EventBus.MassTransit.RabbitMq.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
+using EventBus.Contracts.Order;
 using EventBus.MassTransit.RabbitMq.Constants;
 using MassTransit;
-using PaymentService.Api.IntegrationEvents;
-using PaymentService.Api.IntegrationEvents.Handlers;
+using PaymentService.Api.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,8 +41,6 @@ builder.Services.AddMassTransit(x =>
 var app = builder.Build();
 
 var bus = app.Services.GetRequiredService<IBus>();
-
-bus.Publish(new OrderStartedIntegrationEvent { OrderId = 29});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
