@@ -8,7 +8,7 @@ namespace IdentityServer.Api.Services.Builder
 {
     public static class TokenBuilder
     {
-        public  static string GetToken(this User user)
+        public  static string CreateJsonWebToken(this User user)
         {
             var claims = new Claim[]
             {

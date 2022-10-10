@@ -23,7 +23,7 @@ namespace IdentityServer.Api.Services
 
             if (user != null)
             {
-                var encodedJwt = user.GetToken();
+                var encodedJwt = user.CreateJsonWebToken();
                 return Task.FromResult(new ResponseModel(user.FullName, encodedJwt));
             }
 
@@ -40,7 +40,7 @@ namespace IdentityServer.Api.Services
 
             await context.SaveChangesAsync();
 
-            var encodedJwt = user.Entity.GetToken();
+            var encodedJwt = user.Entity.CreateJsonWebToken();
 
             return new ResponseModel(registrationRequest.FullName, encodedJwt);
         }
