@@ -17,18 +17,13 @@ namespace IdentityServer.Api.Services
         }
         public Task<ResponseModel> Login(LoginRequestModel loginRequest)
         {
-            var user = context.Users.AsNoTracking().SingleOrDefault(p => p.Email == loginRequest.Email && p.Password == loginRequest.Password);
+            var user = context.Users
+                .AsNoTracking()
+                .SingleOrDefault(p => p.Email == loginRequest.Email && p.Password == loginRequest.Password);
 
             if (user != null)
             {
-                var claims = new Claim[]
-                {
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Name,user.FullName),
-                };
-
-                var encodedJwt = TokenBuilder.GetToken(claims);
-
+                var encodedJwt = user.GetToken();
                 return Task.FromResult(new ResponseModel(user.FullName, encodedJwt));
             }
 
@@ -45,13 +40,7 @@ namespace IdentityServer.Api.Services
 
             await context.SaveChangesAsync();
 
-            var claims = new Claim[]
-            {
-                    new Claim(ClaimTypes.Email, registrationRequest.Email),
-                    new Claim(ClaimTypes.Name,registrationRequest.FullName),
-            };
-
-            var encodedJwt = TokenBuilder.GetToken(claims);
+            var encodedJwt = user.Entity.GetToken();
 
             return new ResponseModel(registrationRequest.FullName, encodedJwt);
         }
