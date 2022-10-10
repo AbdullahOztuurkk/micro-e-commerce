@@ -4,7 +4,6 @@ using IdentityServer.Api.Models.Request;
 using IdentityServer.Api.Models.Response;
 using IdentityServer.Api.Services.Builder;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace IdentityServer.Api.Services
 {
@@ -15,16 +14,16 @@ namespace IdentityServer.Api.Services
         {
             this.context = context;
         }
-        public Task<ResponseModel> Login(LoginRequestModel loginRequest)
+        public async Task<ResponseModel> Login(LoginRequestModel loginRequest)
         {
-            var user = context.Users
+            var user = await context.Users
                 .AsNoTracking()
-                .SingleOrDefault(p => p.Email == loginRequest.Email && p.Password == loginRequest.Password);
+                .SingleOrDefaultAsync(p => p.Email == loginRequest.Email && p.Password == loginRequest.Password);
 
-            if (user != null)
+            if (user is not null)
             {
                 var encodedJwt = user.CreateJsonWebToken();
-                return Task.FromResult(new ResponseModel(user.FullName, encodedJwt));
+                return new ResponseModel(user.FullName, encodedJwt);
             }
 
             return null;
