@@ -8,15 +8,10 @@ namespace CatalogService.Persistence.Context
     public class CatalogContext : DbContext
     {
         public const string DEFAULT_SCHEMA = "catalog";
-        public IConfiguration configuration
-        {
-            get
-            {
-                var configurationBuilder = new ConfigurationBuilder();
-                configurationBuilder.AddJsonFile("appsettings.json");
-                return configurationBuilder.Build();
-            }
-        }
+        public IConfiguration configuration => new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
 
         public CatalogContext(DbContextOptions<CatalogContext> options) : base(options) { }
         public DbSet<CatalogItem> CatalogItems { get; set; }
@@ -30,7 +25,7 @@ namespace CatalogService.Persistence.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("CleanArchContext"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("CatalogContext"));
         }
     }
 }
