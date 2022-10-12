@@ -56,13 +56,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{62C7AD00-4047-400A-8959-4C067979333F}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		ServiceUrls.txt = ServiceUrls.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{ADC63327-B742-4DA5-907F-92C10D24DE9B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.MassTransit.RabbitMq", "src\BuildingBlocks\EventBus\EventBus.MassTransit.RabbitMq\EventBus.MassTransit.RabbitMq.csproj", "{5C21FD3E-F37E-4E37-8BF5-EA49417C2C82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Contracts", "src\BuildingBlocks\EventBus\EventBus.Contracts\EventBus.Contracts.csproj", "{A62D4273-8725-4B28-AFC5-011F34341673}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Contracts", "src\BuildingBlocks\EventBus\EventBus.Contracts\EventBus.Contracts.csproj", "{A62D4273-8725-4B28-AFC5-011F34341673}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
