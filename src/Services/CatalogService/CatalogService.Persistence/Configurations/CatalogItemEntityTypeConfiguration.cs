@@ -9,7 +9,7 @@ namespace CatalogService.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<CatalogItem> builder)
         {
-            builder.ToTable("Catalog", CatalogContext.DEFAULT_SCHEMA);
+            builder.ToTable("CatalogItems");
 
             builder.HasKey(x => x.Id);
 

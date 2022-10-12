@@ -7,7 +7,6 @@ namespace CatalogService.Persistence.Context
 {
     public class CatalogContext : DbContext
     {
-        public const string DEFAULT_SCHEMA = "catalog";
         public IConfiguration configuration => new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json")
