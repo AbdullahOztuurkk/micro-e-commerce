@@ -6,6 +6,10 @@ namespace CatalogService.Application.Features.Queries.GetItemsEvent
 {
     public class GetItemsQueryRequest : IRequest<PaginatedItemsViewModel<CatalogItem>>
     {
-        public PaginateSettings PaginateSettings { get; set; }
+        public GetItemsQueryRequest(PaginateSettings? paginateSettings = null)
+        {
+            PaginateSettings = paginateSettings is not null ? paginateSettings : new PaginateSettings();
+        }
+        public PaginateSettings PaginateSettings { get; private set; }
     }
 }

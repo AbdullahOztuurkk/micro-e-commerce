@@ -5,6 +5,10 @@ namespace CatalogService.Application.Features.Queries.GetItemsByIdEvent
 {
     public class GetItemByIdQueryRequest : IRequest<CatalogItem>
     {
-        public int Id { get; set; }
+        public GetItemByIdQueryRequest(int id)
+        {
+            Id = id;
+        }
+        public int Id { get; private set; }
     }
 }
