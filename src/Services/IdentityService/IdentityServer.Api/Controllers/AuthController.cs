@@ -21,18 +21,22 @@ namespace IdentityServer.Api.Controllers
         [HttpPost]
         [Route("login")]
         [ProducesResponseType(typeof(ResponseModel),StatusCodes.Status200OK)]
-        public Task<ResponseModel> Login([FromBody] LoginRequestModel request)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Login([FromBody] LoginRequestModel request)
         {
-            return IdentityService.Login(request);
+            var result = await IdentityService.Login(request);
+            return  result is null ? BadRequest() : Ok(result);
         }
 
         // POST api/auth/register
         [HttpPost]
         [Route("register")]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status200OK)]
-        public Task<ResponseModel> Register([FromBody] RegistrationRequestModel request)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Register([FromBody] RegistrationRequestModel request)
         {
-            return IdentityService.Register(request);
+            var result = await IdentityService.Register(request);
+            return result is null ? BadRequest() : Ok(result);
         }
     }
 }
