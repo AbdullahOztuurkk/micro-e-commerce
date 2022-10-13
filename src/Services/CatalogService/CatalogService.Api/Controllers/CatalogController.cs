@@ -23,7 +23,7 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> ItemsAsync([FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {
-            return Ok(mediator.Send(new GetItemsQueryRequest { PaginateSettings = { PageIndex = pageIndex, PageSize = pageSize } }));
+            return Ok(await mediator.Send(new GetItemsQueryRequest(new PaginateSettings(pageIndex, pageSize))));
         }
 
 
@@ -34,7 +34,7 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(typeof(CatalogItem), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<CatalogItem>> ItemByIdAsync(int id)
         {
-            var result = mediator.Send(new GetItemByIdQueryRequest { Id = id });
+            var result = await mediator.Send(new GetItemByIdQueryRequest(id));
             if (result is null)
                 NotFound();
             return Ok(result);
@@ -44,17 +44,10 @@ namespace CatalogService.Api.Controllers
         [HttpGet]
         [Route("items/withname/{name:minlength(1)}")]
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsWithNameAsync(string name, [FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
+        public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsWithNameAsync(string name,
+            [FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {
-            var result = mediator.Send(new GetItemsByNameQueryRequest
-            {
-                Name = name,
-                PaginateSettings = {
-                    PageIndex = pageIndex,
-                    PageSize = pageSize
-                }
-            });
-
+            var result = await mediator.Send(new GetItemsByNameQueryRequest(name, new PaginateSettings(pageIndex, pageSize)));
             return Ok(result);
         }
 
@@ -62,17 +55,11 @@ namespace CatalogService.Api.Controllers
         [HttpGet]
         [Route("items/type/{catalogTypeId}/brand/{catalogBrandId:int?}")]
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsByTypeIdAndBrandIdAsync(int catalogTypeId, int? catalogBrandId, [FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
+        public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsByTypeIdAndBrandIdAsync(
+            int catalogTypeId, int? catalogBrandId, [FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {
-            var result = mediator.Send(new GetItemsByTypeAndBrandQueryRequest
-            {
-                BrandId = catalogBrandId,
-                TypeId = catalogTypeId,
-                PaginateSettings = {
-                    PageIndex = pageIndex,
-                    PageSize = pageSize
-                }
-            });
+            var result = await mediator.Send(new GetItemsByTypeAndBrandQueryRequest(catalogTypeId, catalogBrandId,
+                new PaginateSettings(pageIndex, pageSize)));
 
             return Ok(result);
         }
@@ -81,17 +68,10 @@ namespace CatalogService.Api.Controllers
         [HttpGet]
         [Route("items/type/all/brand/{catalogBrandId:int?}")]
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsByBrandIdAsync(int? catalogBrandId, [FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
+        public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsByBrandIdAsync(int? catalogBrandId,
+            [FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {
-            var result = mediator.Send(new GetItemsByBrandQueryRequest
-            {
-                BrandId = catalogBrandId,
-                PaginateSettings = {
-                    PageIndex = pageIndex,
-                    PageSize = pageSize
-                }
-            });
-
+            var result = await mediator.Send(new GetItemsByBrandQueryRequest(catalogBrandId,new PaginateSettings(pageIndex,pageSize)));
             return Ok(result);
         }
 
