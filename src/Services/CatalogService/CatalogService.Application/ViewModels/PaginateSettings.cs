@@ -8,7 +8,12 @@ namespace CatalogService.Application.ViewModels
 {
     public class PaginateSettings
     {
-        public int PageSize { get; set; } = 10;
-        public int PageIndex { get; set; } = 0;
+        public PaginateSettings(int pageIndex = 0, int pageSize = 10)
+        {
+            PageIndex = pageIndex;
+            PageSize = pageSize;
+        }
+        public int PageSize { get; set; }
+        public int PageIndex { get; set; }
     }
 }
