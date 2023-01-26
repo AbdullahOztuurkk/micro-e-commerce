@@ -1,5 +1,5 @@
 using BasketService.Application.Extensions;
-using EventBus.MassTransit.RabbitMq.Constants;
+using EventBus.MassTransit.RabbitMq;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,26 +13,16 @@ builder.Services.AddSingleton(sp => sp.ConfigureRedis(builder.Configuration));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMassTransit(x =>
+builder.Services.AddMassTransitAsEventBus((bus) =>
 {
-    //x.AddConsumer<BasketEventHandler>();
-    
-    x.SetKebabCaseEndpointNameFormatter();
-
-    x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+    bus.SetKebabCaseEndpointNameFormatter();
+    //bus.AddConsumer<BasketEventHandler>();
+}, (factory, provider) =>
+{
+    factory.ReceiveEndpoint(Global.Services.BasketServiceQueueName, ep =>
     {
-        cfg.ConfigureEndpoints(provider);
-
-        cfg.Host(RabbitMqConstants.Uri, h =>
-        {
-            h.Username(RabbitMqConstants.UserName);
-            h.Password(RabbitMqConstants.Password);
-        });
-        cfg.ReceiveEndpoint(RabbitMqConstants.BasketServiceQueueName, ep =>
-        {
-            //ep.ConfigureConsumer<BasketIntegrationEventHandler>(provider);
-        });
-    }));
+        //ep.ConfigureConsumer<BasketIntegrationEventHandler>(provider);
+    });
 });
 
 var app = builder.Build();

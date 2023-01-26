@@ -1,4 +1,4 @@
-﻿using EventBus.MassTransit.RabbitMq.Constants;
+﻿using EventBus.MassTransit.RabbitMq;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using NotificationService.Handlers;
@@ -11,29 +11,18 @@ public class Program
     {
         ServiceCollection services = new();
 
-        services.AddMassTransit(x =>
+        services.AddMassTransitAsEventBus((bus) =>
         {
-            x.AddConsumer<OrderPaymentFailedIntegrationEventHandler>();
-            x.AddConsumer<OrderPaymentSuccessIntegrationEventHandler>();
-
-            x.SetKebabCaseEndpointNameFormatter();
-
-            x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+            bus.SetKebabCaseEndpointNameFormatter();
+            bus.AddConsumer<OrderPaymentFailedIntegrationEventHandler>();
+            bus.AddConsumer<OrderPaymentSuccessIntegrationEventHandler>();
+        }, (factory, provider) =>
+        {
+            factory.ReceiveEndpoint(Global.Services.PaymentServiceQueueName, ep =>
             {
-                cfg.ConfigureEndpoints(provider);
-
-                cfg.Host(RabbitMqConstants.Uri, h =>
-                {
-                    h.Username(RabbitMqConstants.UserName);
-                    h.Password(RabbitMqConstants.Password);
-                });
-                cfg.ReceiveEndpoint(RabbitMqConstants.PaymentServiceQueueName, ep =>
-                {
-                    ep.ConfigureConsumer<OrderPaymentFailedIntegrationEventHandler>(provider);
-                    ep.ConfigureConsumer<OrderPaymentSuccessIntegrationEventHandler>(provider);
-
-                });
-            }));
+                ep.ConfigureConsumer<OrderPaymentFailedIntegrationEventHandler>(provider);
+                ep.ConfigureConsumer<OrderPaymentSuccessIntegrationEventHandler>(provider);
+            });
         });
 
         var serviceProvider = services.BuildServiceProvider();
