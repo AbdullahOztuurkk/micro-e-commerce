@@ -13,12 +13,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMassTransitAsEventBus((bus) =>
 {
-    bus.SetKebabCaseEndpointNameFormatter();
     bus.AddConsumer<OrderStartedIntegrationEventHandler>();
 },
 (factory, provider) =>
 {
-    factory.ReceiveEndpoint(Global.Services.OrderServiceQueueName, ep =>
+    factory.ReceiveEndpoint(Global.Queues.OrderStartedIntegrationEvent, ep =>
     {
         ep.ConfigureConsumer<OrderStartedIntegrationEventHandler>(provider);
     });
@@ -26,7 +25,7 @@ builder.Services.AddMassTransitAsEventBus((bus) =>
 
 var app = builder.Build();
 
-var bus = app.Services.GetRequiredService<IBus>();
+var bus = app.Services.GetRequiredService<IBusControl>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -42,3 +41,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+bus.StartAsync();
+
+Console.Out.WriteLine("Payment service is working right now!");
+
+bus.StopAsync();

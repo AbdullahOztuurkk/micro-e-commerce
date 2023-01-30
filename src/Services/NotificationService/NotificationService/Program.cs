@@ -13,25 +13,31 @@ public class Program
 
         services.AddMassTransitAsEventBus((bus) =>
         {
-            bus.SetKebabCaseEndpointNameFormatter();
             bus.AddConsumer<OrderPaymentFailedIntegrationEventHandler>();
             bus.AddConsumer<OrderPaymentSuccessIntegrationEventHandler>();
-        }, (factory, provider) =>
+        }, 
+        (factory, provider) =>
         {
-            factory.ReceiveEndpoint(Global.Services.PaymentServiceQueueName, ep =>
+            factory.ReceiveEndpoint(Global.Queues.OrderPaymentFailedIntegrationEvent, ep =>
             {
                 ep.ConfigureConsumer<OrderPaymentFailedIntegrationEventHandler>(provider);
+            });
+
+            factory.ReceiveEndpoint(Global.Queues.OrderPaymentSuccessIntegrationEvent, ep =>
+            {
                 ep.ConfigureConsumer<OrderPaymentSuccessIntegrationEventHandler>(provider);
             });
         });
 
         var serviceProvider = services.BuildServiceProvider();
 
-        var bus = serviceProvider.GetRequiredService<IBus>();
+        var bus = serviceProvider.GetRequiredService<IBusControl>();
 
-        Console.WriteLine("Notification Service is running!");
+        bus.StartAsync();
 
-        Console.ReadLine();
+        Console.Out.WriteLine("Notification Service is working right now!");
+        
+        bus.StopAsync();
     }
 }
 

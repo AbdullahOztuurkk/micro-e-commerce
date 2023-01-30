@@ -17,5 +17,12 @@
             public const string CatalogServiceQueueName = "catalog.service";
             public const string BasketServiceQueueName = "basket.service";
         }
+
+        public static class Queues
+        {
+            public const string OrderStartedIntegrationEvent = "EventBus.Contracts.Order.OrderStartedIntegrationEvent";
+            public const string OrderPaymentSuccessIntegrationEvent = "EventBus.Contracts.Order.OrderPaymentSuccessIntegrationEvent";
+            public const string OrderPaymentFailedIntegrationEvent = "EventBus.Contracts.Order.OrderPaymentFailedIntegrationEvent";
+        }
     }
 }
