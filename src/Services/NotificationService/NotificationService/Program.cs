@@ -18,14 +18,14 @@ public class Program
         }, 
         (factory, provider) =>
         {
-            factory.ReceiveEndpoint(Global.Queues.OrderPaymentFailedIntegrationEvent, ep =>
-            {
-                ep.ConfigureConsumer<OrderPaymentFailedIntegrationEventHandler>(provider);
-            });
-
             factory.ReceiveEndpoint(Global.Queues.OrderPaymentSuccessIntegrationEvent, ep =>
             {
                 ep.ConfigureConsumer<OrderPaymentSuccessIntegrationEventHandler>(provider);
+            });
+
+            factory.ReceiveEndpoint(Global.Queues.OrderPaymentFailedIntegrationEvent, ep =>
+            {
+                ep.ConfigureConsumer<OrderPaymentFailedIntegrationEventHandler>(provider);
             });
         });
 

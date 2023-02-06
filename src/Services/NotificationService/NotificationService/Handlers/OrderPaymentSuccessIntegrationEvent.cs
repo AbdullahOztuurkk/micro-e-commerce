@@ -17,8 +17,8 @@ namespace NotificationService.Handlers
         public Task Consume(ConsumeContext<OrderPaymentSuccessIntegrationEvent> context)
         {
             //Fake email logic
-            Console.WriteLine("Order payment has been succeeded!");
-            //logger.LogInformation("Order payment has been succeeded!");
+            var message = context.Message;
+            Console.Out.WriteLine($"Order payment has been succeeded with Id : {message.Id}!");
             return Task.CompletedTask;
         }
     }

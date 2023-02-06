@@ -9,13 +9,11 @@
             public const string Password = "guest";
         }
 
-        public static class Services
+        public static class Queues
         {
-            public const string OrderServiceQueueName = "order.service";
-            public const string NotificationServiceQueueName = "notification.service";
-            public const string PaymentServiceQueueName = "payment.service";
-            public const string CatalogServiceQueueName = "catalog.service";
-            public const string BasketServiceQueueName = "basket.service";
+            public const string OrderStartedIntegrationEvent = "EventBus.Contracts.Order.OrderStartedIntegrationEvent";
+            public const string OrderPaymentSuccessIntegrationEvent = "EventBus.Contracts.Order.OrderPaymentSuccessIntegrationEvent";
+            public const string OrderPaymentFailedIntegrationEvent = "EventBus.Contracts.Order.OrderPaymentFailedIntegrationEvent";
         }
 
         public static class Queues

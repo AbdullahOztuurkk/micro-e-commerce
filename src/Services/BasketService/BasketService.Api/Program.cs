@@ -13,17 +13,18 @@ builder.Services.AddSingleton(sp => sp.ConfigureRedis(builder.Configuration));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*
 builder.Services.AddMassTransitAsEventBus((bus) =>
 {
-    bus.SetKebabCaseEndpointNameFormatter();
     //bus.AddConsumer<BasketEventHandler>();
 }, (factory, provider) =>
 {
-    factory.ReceiveEndpoint(Global.Services.BasketServiceQueueName, ep =>
+    factory.ReceiveEndpoint(Global.Queues.BasketServiceQueueName, ep =>
     {
         //ep.ConfigureConsumer<BasketIntegrationEventHandler>(provider);
     });
 });
+*/
 
 var app = builder.Build();
 

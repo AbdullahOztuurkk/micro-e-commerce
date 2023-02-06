@@ -1,5 +1,6 @@
 ﻿using MassTransit;
 using MassTransit.ExtensionsDependencyInjectionIntegration;
+using MassTransit.RabbitMqTransport;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EventBus.MassTransit.RabbitMq
