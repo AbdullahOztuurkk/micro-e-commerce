@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BasketService.Domain
+﻿namespace EventBus.Contracts.Models.Basket
 {
-    public class CustomerBasket : IValidatableObject
+    public class CustomerBasket
     {
         public string BuyerId { get; set; }
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
@@ -14,11 +12,6 @@ namespace BasketService.Domain
         public CustomerBasket(string customerId)
         {
             BuyerId = customerId;
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            throw new NotImplementedException();
         }
     }
 }
