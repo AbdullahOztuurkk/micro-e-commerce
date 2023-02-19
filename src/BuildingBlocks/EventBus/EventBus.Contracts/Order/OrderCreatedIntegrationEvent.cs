@@ -11,7 +11,7 @@ namespace EventBus.Contracts.Order
         public Address Address { get; set; }
         public CardInformation CardInformation { get; set; }
         public string Buyer { get; set; }
-        public OrderCreatedIntegrationEvent(string userId, string userName,int orderNumber, Address address, CardInformation cardInformation, string buyer
+        public OrderCreatedIntegrationEvent(string userId, string userName,int orderNumber, Address address, CardInformation cardInformation, string buyer)
         {
             UserId = userId;
             UserName = userName;
