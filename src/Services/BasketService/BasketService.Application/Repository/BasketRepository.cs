@@ -21,10 +21,10 @@ namespace BasketService.Application.Repository
     public class RedisBasketRepository : IBasketRepository
     {
         private readonly ILogger<RedisBasketRepository> logger;
-        private readonly IConnectionMultiplexer _redis;
+        private readonly ConnectionMultiplexer _redis;
         private readonly IDatabase database;
 
-        public RedisBasketRepository(ILoggerFactory loggerFactory, IConnectionMultiplexer redis)
+        public RedisBasketRepository(ILoggerFactory loggerFactory, ConnectionMultiplexer redis)
         {
             this.logger = loggerFactory.CreateLogger<RedisBasketRepository>();
             _redis = redis;
