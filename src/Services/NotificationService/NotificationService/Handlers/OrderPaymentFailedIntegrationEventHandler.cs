@@ -9,9 +9,9 @@ namespace NotificationService.Handlers
     {
         private readonly ILogger<OrderPaymentFailedIntegrationEventHandler> logger;
 
-        public OrderPaymentFailedIntegrationEventHandler(ILogger<OrderPaymentFailedIntegrationEventHandler> logger)
+        public OrderPaymentFailedIntegrationEventHandler(ILoggerFactory loggerFactory)
         {
-            this.logger = logger;
+            this.logger = loggerFactory.CreateLogger<OrderPaymentFailedIntegrationEventHandler>();
         }
 
         public Task Consume(ConsumeContext<OrderPaymentFailedIntegrationEvent> context)

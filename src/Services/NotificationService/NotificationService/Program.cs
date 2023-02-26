@@ -1,6 +1,7 @@
 ﻿using EventBus.MassTransit.RabbitMq;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NotificationService.Handlers;
 
 namespace MyNamespace;
@@ -10,6 +11,10 @@ public class Program
     public static void Main(string[] args)
     {
         ServiceCollection services = new();
+
+        var loggerFactory = LoggerFactory.Create(o => o.AddConsole());
+
+        services.AddSingleton<ILoggerFactory>(loggerFactory);
 
         services.AddMassTransitAsEventBus((bus) =>
         {
@@ -38,6 +43,8 @@ public class Program
         Console.Out.WriteLine("Notification Service is working right now!");
         
         bus.StopAsync();
+
+        Console.ReadLine();
     }
 }
 
