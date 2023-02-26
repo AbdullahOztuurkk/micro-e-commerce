@@ -3,6 +3,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PaymentService.Api.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class PaymentController : ControllerBase
@@ -13,8 +14,10 @@ public class PaymentController : ControllerBase
         this.bus = bus;
     }
 
-    public IActionResult CreateFakePayment()
+    [HttpPost]
+    public async Task<IActionResult> CreateFakePaymentAsync()
     {
-        return Ok(bus.Publish<OrderStartedIntegrationEvent>(new OrderStartedIntegrationEvent(new Random().Next(0,100))));
+        await bus.Publish(new OrderPaymentFailedIntegrationEvent(Guid.NewGuid(),new Random().Next(0, 100).ToString()));
+        return Ok();
     }
 }
