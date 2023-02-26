@@ -13,7 +13,7 @@ namespace IdentityServer.Api.Services.Builder
             var claims = new Claim[]
             {
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Name, user.FullName),
+                    new Claim(ClaimTypes.NameIdentifier, user.FullName),
             };
 
             var SymmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("AuthContextTopSecretLongSymmetricKey"));
