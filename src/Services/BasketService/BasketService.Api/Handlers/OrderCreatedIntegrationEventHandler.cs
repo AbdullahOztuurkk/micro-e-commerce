@@ -10,10 +10,10 @@ namespace BasketService.Api.Handlers
         private readonly IBasketRepository repository;
         private readonly ILogger<OrderCreatedIntegrationEventHandler> logger;
 
-        public OrderCreatedIntegrationEventHandler(IBasketRepository repository, ILogger<OrderCreatedIntegrationEventHandler> logger)
+        public OrderCreatedIntegrationEventHandler(IBasketRepository repository, LoggerFactory loggerFactory)
         {
             this.repository = repository;
-            this.logger = logger;
+            this.logger = loggerFactory.CreateLogger<OrderCreatedIntegrationEventHandler>();
         }
 
         public async Task Consume(ConsumeContext<OrderCreatedIntegrationEvent> context)
