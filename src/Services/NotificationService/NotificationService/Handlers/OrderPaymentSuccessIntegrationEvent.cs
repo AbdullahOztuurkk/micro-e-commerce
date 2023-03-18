@@ -1,4 +1,4 @@
-﻿using EventBus.Contracts.Order;
+﻿using EventBus.Contracts.NotificationServiceEvents;
 using EventBus.MassTransit.RabbitMq.Events.Handlers;
 using MassTransit;
 using Microsoft.Extensions.Logging;

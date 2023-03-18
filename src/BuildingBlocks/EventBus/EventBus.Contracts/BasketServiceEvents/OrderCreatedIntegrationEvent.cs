@@ -1,7 +1,7 @@
 ﻿using EventBus.Contracts.Models;
 using EventBus.MassTransit.RabbitMq.Events;
 
-namespace EventBus.Contracts.Order
+namespace EventBus.Contracts.BasketServiceEvents
 {
     public class OrderCreatedIntegrationEvent : IntegrationEvent
     {
@@ -11,7 +11,7 @@ namespace EventBus.Contracts.Order
         public Address Address { get; set; }
         public CardInformation CardInformation { get; set; }
         public string Buyer { get; set; }
-        public OrderCreatedIntegrationEvent(string userId, string userName,int orderNumber, Address address, CardInformation cardInformation, string buyer)
+        public OrderCreatedIntegrationEvent(string userId, string userName, int orderNumber, Address address, CardInformation cardInformation, string buyer)
         {
             UserId = userId;
             UserName = userName;

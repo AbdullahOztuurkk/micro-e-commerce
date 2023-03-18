@@ -12,7 +12,7 @@ builder.Services.AddApplicationDependencies(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddLogging();
 
 builder.Services.AddMassTransitAsEventBus((bus) =>
 {
@@ -20,7 +20,7 @@ builder.Services.AddMassTransitAsEventBus((bus) =>
 }, 
 (factory, provider) =>
 {
-    factory.ReceiveEndpoint(Global.Queues.OrderCreatedIntegrationEvent, ep =>
+    factory.ReceiveEndpoint(Global.Queues.BasketService.OrderCreatedIntegrationEvent, ep =>
     {
         ep.ConfigureConsumer<OrderCreatedIntegrationEventHandler>(provider);
     });

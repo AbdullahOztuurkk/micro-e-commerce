@@ -1,5 +1,5 @@
 ﻿using BasketService.Application.Repository;
-using EventBus.Contracts.Order;
+using EventBus.Contracts.BasketServiceEvents;
 using EventBus.MassTransit.RabbitMq.Events.Handlers;
 using MassTransit;
 
@@ -10,7 +10,7 @@ namespace BasketService.Api.Handlers
         private readonly IBasketRepository repository;
         private readonly ILogger<OrderCreatedIntegrationEventHandler> logger;
 
-        public OrderCreatedIntegrationEventHandler(IBasketRepository repository, LoggerFactory loggerFactory)
+        public OrderCreatedIntegrationEventHandler(IBasketRepository repository, ILoggerFactory loggerFactory)
         {
             this.repository = repository;
             this.logger = loggerFactory.CreateLogger<OrderCreatedIntegrationEventHandler>();

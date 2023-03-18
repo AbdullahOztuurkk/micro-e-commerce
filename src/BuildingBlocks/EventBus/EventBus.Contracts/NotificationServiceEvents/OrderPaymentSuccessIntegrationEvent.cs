@@ -1,10 +1,13 @@
 ﻿using EventBus.MassTransit.RabbitMq.Events;
 
-namespace EventBus.Contracts.Order
+namespace EventBus.Contracts.NotificationServiceEvents
 {
     public class OrderPaymentSuccessIntegrationEvent : IntegrationEvent
     {
         public Guid OrderId { get; set; }
-        public OrderPaymentSuccessIntegrationEvent(Guid orderId) => OrderId = orderId;
+        public OrderPaymentSuccessIntegrationEvent(Guid orderId)
+        {
+            OrderId = orderId;
+        }
     }
 }

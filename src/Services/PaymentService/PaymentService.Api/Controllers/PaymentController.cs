@@ -1,4 +1,4 @@
-﻿using EventBus.Contracts.Order;
+﻿using EventBus.Contracts.NotificationServiceEvents;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 

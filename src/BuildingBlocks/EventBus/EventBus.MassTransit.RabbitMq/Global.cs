@@ -11,10 +11,21 @@
 
         public static class Queues
         {
-            public const string OrderStartedIntegrationEvent            = "EventBus.Contracts.Order.OrderStartedIntegrationEvent";
-            public const string OrderPaymentSuccessIntegrationEvent     = "EventBus.Contracts.Order.OrderPaymentSuccessIntegrationEvent";
-            public const string OrderPaymentFailedIntegrationEvent      = "EventBus.Contracts.Order.OrderPaymentFailedIntegrationEvent";
-            public const string OrderCreatedIntegrationEvent            = "EventBus.Contracts.Order.OrderCreatedIntegrationEvent";
+            public static class NotificationService
+            {
+                public const string OrderPaymentSuccessIntegrationEvent = "NotificationService.Order-Payment-Success";
+                public const string OrderPaymentFailedIntegrationEvent  = "NotificationService.Order-Payment-Failed";
+            }
+
+            public static class PaymentService
+            {
+                public const string OrderStartedIntegrationEvent = "PaymentService.Order-Started";
+            }
+
+            public static class BasketService
+            {
+                public const string OrderCreatedIntegrationEvent = "BasketService.Order-Created";
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ builder.Services.AddMassTransitAsEventBus((bus) =>
 },
 (factory, provider) =>
 {
-    factory.ReceiveEndpoint(Global.Queues.OrderStartedIntegrationEvent, ep =>
+    factory.ReceiveEndpoint(Global.Queues.PaymentService.OrderStartedIntegrationEvent, ep =>
     {
         ep.ConfigureConsumer<OrderStartedIntegrationEventHandler>(provider);
     });

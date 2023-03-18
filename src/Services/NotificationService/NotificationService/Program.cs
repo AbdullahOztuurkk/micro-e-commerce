@@ -23,12 +23,12 @@ public class Program
         }, 
         (factory, provider) =>
         {
-            factory.ReceiveEndpoint(Global.Queues.OrderPaymentSuccessIntegrationEvent, ep =>
+            factory.ReceiveEndpoint(Global.Queues.NotificationService.OrderPaymentSuccessIntegrationEvent, ep =>
             {
                 ep.ConfigureConsumer<OrderPaymentSuccessIntegrationEventHandler>(provider);
             });
 
-            factory.ReceiveEndpoint(Global.Queues.OrderPaymentFailedIntegrationEvent, ep =>
+            factory.ReceiveEndpoint(Global.Queues.NotificationService.OrderPaymentFailedIntegrationEvent, ep =>
             {
                 ep.ConfigureConsumer<OrderPaymentFailedIntegrationEventHandler>(provider);
             });

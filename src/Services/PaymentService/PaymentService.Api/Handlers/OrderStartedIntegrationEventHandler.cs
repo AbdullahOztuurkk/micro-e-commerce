@@ -1,4 +1,5 @@
-﻿using EventBus.Contracts.Order;
+﻿using EventBus.Contracts.NotificationServiceEvents;
+using EventBus.Contracts.PaymentServiceEvents;
 using EventBus.MassTransit.RabbitMq.Events;
 using EventBus.MassTransit.RabbitMq.Events.Handlers;
 using MassTransit;
