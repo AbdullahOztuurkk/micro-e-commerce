@@ -20,7 +20,7 @@ builder.Services.AddMassTransitAsEventBus((bus) =>
 }, 
 (factory, provider) =>
 {
-    factory.ReceiveEndpoint(Global.Queues.BasketService.OrderCreatedIntegrationEvent, ep =>
+    factory.ReceiveEndpoint(Global.Queues.Basket_OrderCreated, ep =>
     {
         ep.ConfigureConsumer<OrderCreatedIntegrationEventHandler>(provider);
     });
