@@ -1,5 +1,5 @@
-﻿using EventBus.Contracts.NotificationServiceEvents;
-using EventBus.Contracts.PaymentServiceEvents;
+﻿using EventBus.Contracts.ServiceEvents.Notification;
+using EventBus.Contracts.ServiceEvents.Payment;
 using EventBus.MassTransit.RabbitMq.Events;
 using EventBus.MassTransit.RabbitMq.Events.Handlers;
 using MassTransit;

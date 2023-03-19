@@ -1,5 +1,5 @@
 ﻿using BasketService.Application.Repository;
-using EventBus.Contracts.BasketServiceEvents;
+using EventBus.Contracts.ServiceEvents.Basket;
 using EventBus.MassTransit.RabbitMq.Events.Handlers;
 using MassTransit;
 

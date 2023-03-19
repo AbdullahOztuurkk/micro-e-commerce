@@ -1,6 +1,6 @@
 ﻿using EventBus.MassTransit.RabbitMq.Events;
 
-namespace EventBus.Contracts.NotificationServiceEvents
+namespace EventBus.Contracts.ServiceEvents.Notification
 {
     public class OrderPaymentSuccessIntegrationEvent : IntegrationEvent
     {

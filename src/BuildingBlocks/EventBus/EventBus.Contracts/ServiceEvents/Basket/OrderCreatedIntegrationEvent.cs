@@ -1,7 +1,7 @@
 ﻿using EventBus.Contracts.Models;
 using EventBus.MassTransit.RabbitMq.Events;
 
-namespace EventBus.Contracts.BasketServiceEvents
+namespace EventBus.Contracts.ServiceEvents.Basket
 {
     public class OrderCreatedIntegrationEvent : IntegrationEvent
     {

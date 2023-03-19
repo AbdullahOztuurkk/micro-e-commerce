@@ -1,7 +1,7 @@
 ﻿using BasketService.Application.Repository;
 using BasketService.Application.Services;
 using BasketService.Domain;
-using EventBus.Contracts.BasketServiceEvents;
+using EventBus.Contracts.ServiceEvents.Basket;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
