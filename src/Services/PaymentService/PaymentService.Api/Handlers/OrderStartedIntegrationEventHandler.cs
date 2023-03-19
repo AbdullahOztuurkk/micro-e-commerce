@@ -9,13 +9,11 @@ namespace PaymentService.Api.Handlers
     public class OrderStartedIntegrationEventHandler : IIntegrationEventHandler<OrderStartedIntegrationEvent>
     {
         private readonly IConfiguration configuration;
-        private readonly IBus bus;
         private readonly ILogger<OrderStartedIntegrationEventHandler> logger;
 
-        public OrderStartedIntegrationEventHandler(IConfiguration configuration, IBus bus, ILogger<OrderStartedIntegrationEventHandler> logger)
+        public OrderStartedIntegrationEventHandler(IConfiguration configuration, ILogger<OrderStartedIntegrationEventHandler> logger)
         {
             this.configuration = configuration;
-            this.bus = bus;
             this.logger = logger;
         }
 
