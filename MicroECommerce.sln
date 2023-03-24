@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Domain", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Application", "src\Services\OrderService\OrderService.Application\OrderService.Application.csproj", "{5F905430-34AF-44BF-AA49-7BC620D60E1F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Persistence", "src\Services\OrderService\OrderService.Persistence\OrderService.Persistence.csproj", "{0D045A0C-E0D1-4BA0-8D54-EFE9BFB146E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Infrastructure", "src\Services\OrderService\OrderService.Persistence\OrderService.Infrastructure.csproj", "{0D045A0C-E0D1-4BA0-8D54-EFE9BFB146E6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Api", "src\Services\OrderService\OrderService.Api\OrderService.Api.csproj", "{A65DD67B-8CE3-468A-87D6-EDD901B36DBA}"
 EndProject
