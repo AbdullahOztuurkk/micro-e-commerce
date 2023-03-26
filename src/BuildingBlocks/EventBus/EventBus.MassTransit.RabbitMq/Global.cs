@@ -15,6 +15,7 @@
             public const string Notification_OrderPaymentFailed = "NotificationService.Order-Payment-Failed";
             public const string Payment_OrderStarted = "PaymentService.Order-Started";
             public const string Basket_OrderCreated = "BasketService.Order-Created";
+            public const string Order_OrderStarted = "OrderService.Order-Started";
         }
     }
 }
