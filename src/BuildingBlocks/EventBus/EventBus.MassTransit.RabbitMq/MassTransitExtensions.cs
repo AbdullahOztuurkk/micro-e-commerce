@@ -18,7 +18,8 @@ namespace EventBus.MassTransit.RabbitMq
 
                 cfg.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(factory =>
                 {
-                    factory.ConfigureEndpoints(provider);
+                    //https://github.com/MassTransit/MassTransit/issues/1500
+                    //factory.ConfigureEndpoints(provider);
 
                     factory.Host(Global.Config.Uri, h =>
                     {
